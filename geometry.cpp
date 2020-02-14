@@ -21,10 +21,10 @@ int main()
         cin.ignore();
     }
     cout << endl;
-    // for (int i = 0; i < N; i++) {
-    //     cout << circles[i].figure << "(" << circles[i].x << " " << circles[i].y
-    //          << ", " << circles[i].r << ')';
-    // }
-    // cout << endl;
+    for (int i = 0; i < N; i++) {
+        cout << circles[i].figure << "(" << circles[i].x << " " << circles[i].y
+             << ", " << circles[i].r << ')';
+    }
+    cout << endl;
     return 0;
 }
