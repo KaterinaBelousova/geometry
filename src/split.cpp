@@ -3,20 +3,20 @@
 #include<string>
 #include<vector>
 #include<cstring>
-using namespace std;
+
 std::vector<std::string> split(std::string str, char spl)
 {
     int all_spl = 0;
     int N = str.length();
     std::vector<std::string> str_arr;
-    int start_str = 0;//òåêóùèé ýë ñòðîêè
+    int start_str = 0;
     int end_str = 0;
     for (int i = 0; i < N; i++)
     {
         if (str[i] == spl) all_spl++;
     }
     for (int i = 0; i < all_spl+1; i++) {
-        end_str = 0;//ïîçèöèÿ çàïÿòîé
+        end_str = 0;
         for (int j = start_str; j < N; j++) { 
             end_str++;
             if (str[j] == spl) {
@@ -33,10 +33,6 @@ std::vector<std::string> split(std::string str, char spl)
     }
     std::vector<std::string> res_str;
     int sizee = str_arr.size();
-    for (int i = 0; i < sizee; i++)
-    {
-        std::cout << str_arr[i] << std::endl;
-    }
     int size_st = 0;
     for (int i = 0; i < sizee; i++)
     {
@@ -50,11 +46,6 @@ std::vector<std::string> split(std::string str, char spl)
             res_str.push_back(p);
             p = strtok(NULL, " ");
         }
-    }
-    sizee = res_str.size();
-    for (int i = 0; i < sizee; i++)
-    {
-        std::cout << res_str[i] << std::endl;
     }
     try
     {
