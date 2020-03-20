@@ -1,3 +1,5 @@
 all: circle
-circle: geometry.cpp
-	g++ -g -Wall geometry.cpp -o geometry
+circle: 
+	g++ -g -Wall -Werror src/main.cpp -o build/main
+split:
+	g++ -g -Wall -Werror src/*.cpp -o build/main
