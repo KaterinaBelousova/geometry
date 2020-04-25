@@ -1,8 +1,8 @@
 #include "split.h"
-#include<iostream>
-#include<string>
-#include<vector>
-#include<cstring>
+#include <cstring>
+#include <iostream>
+#include <string>
+#include <vector>
 
 std::vector<std::string> split(std::string str, char spl)
 {
@@ -11,13 +11,13 @@ std::vector<std::string> split(std::string str, char spl)
     std::vector<std::string> str_arr;
     int start_str = 0;
     int end_str = 0;
-    for (int i = 0; i < N; i++)
-    {
-        if (str[i] == spl) all_spl++;
+    for (int i = 0; i < N; i++) {
+        if (str[i] == spl)
+            all_spl++;
     }
-    for (int i = 0; i < all_spl+1; i++) {
+    for (int i = 0; i < all_spl + 1; i++) {
         end_str = 0;
-        for (int j = start_str; j < N; j++) { 
+        for (int j = start_str; j < N; j++) {
             end_str++;
             if (str[j] == spl) {
                 break;
@@ -25,8 +25,7 @@ std::vector<std::string> split(std::string str, char spl)
         }
         if (start_str + end_str == N) {
             str_arr.push_back(str.substr(start_str, end_str));
-        }
-        else {
+        } else {
             str_arr.push_back(str.substr(start_str, end_str - 1));
         }
         start_str = start_str + end_str;
@@ -34,27 +33,24 @@ std::vector<std::string> split(std::string str, char spl)
     std::vector<std::string> res_str;
     int sizee = str_arr.size();
     int size_st = 0;
-    for (int i = 0; i < sizee; i++)
-    {
+    for (int i = 0; i < sizee; i++) {
         size_st = str_arr[i].length();
         char* cstr = new char[size_st + 1];
         strcpy(cstr, str_arr[i].c_str());
 
         char* p = strtok(cstr, " ");
-        while (p != 0)
-        {
+        while (p != 0) {
             res_str.push_back(p);
             p = strtok(NULL, " ");
         }
     }
-    try
-    {
-        if (sizee == 3 || sizee == 8) return res_str;
-        else throw "there is problem with coordinates";
-    }
-    catch (const char* exception)
-    {
-            std::cerr << "Error: " << exception << '\n';
+    try {
+        if (sizee == 3 || sizee == 8)
+            return res_str;
+        else
+            throw "there is problem with coordinates";
+    } catch (const char* exception) {
+        std::cerr << "Error: " << exception << '\n';
     }
     return res_str;
 }
