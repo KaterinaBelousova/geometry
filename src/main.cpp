@@ -1,8 +1,8 @@
+#include "split.h"
 #include <cstdio>
 #include <cstdlib>
-#include <string>
 #include <iostream>
-#include "split.h"
+#include <string>
 #define N 256
 using namespace std;
 struct circle {
@@ -19,16 +19,17 @@ int main()
     char tmp1[N];
     for (int i = 0; i < num; i++) {
         cin.clear();
-        while (cin.get() != '\n');
+        while (cin.get() != '\n')
+            ;
         cout << "enter figure(x y, r)" << endl;
         cin.getline(tmp, 100, '(');
         cout << tmp << endl;
-        cin.getline(tmp1, 100,')');
+        cin.getline(tmp1, 100, ')');
         cout << tmp1 << endl;
         string str = string(tmp);
         string coor = string(tmp1);
         split(coor, ',');
     }
-    
+
     return 0;
 }
