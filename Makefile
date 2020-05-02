@@ -1,15 +1,28 @@
 CFLAGS = -g -Wall -Werror
 CC = g++
 EXECUTABLE = prog
-SOURCES = src/main.cpp src/split.cpp
-OBJECTS = $(SOURCES: .c=build/.o)
-
+SOURCES = src/main.cpp src/split.cpp src/geom.cpp src/read-fill.cpp
+#OBJECTS = $(SOURCES: .cpp=build/.o)
+OBJECTS=build/main.o build/geom.o build/split.o build/read-fill.o
 all: $(SOURCES) $(EXECUTABLE)
+
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@
-# circle: 
-# 	$(CC) $(CFLAGS) src/main.cpp -o build/main
-# split:
-# 	$(CC) $(CFLAGS) src/*.cpp -o build/main
+	$(CC) $(CFLAGS) $(OBJECTS) -o bin/prog 
+
+build/main.o: $(SOURCES)
+	$(CC) $(CFLAGS) -c src/main.cpp -o build/main.o
+
+build/geom.o: $(SOURCES)
+	$(CC) $(CFLAGS) -c src/geom.cpp -o build/geom.o
+
+build/split.o: $(SOURCES)
+	$(CC) $(CFLAGS) -c src/split.cpp -o build/split.o
+
+build/read-fill.o: $(SOURCES)
+	$(CC) $(CFLAGS) -c src/read-fill.cpp -o build/read-fill.o
+
 clean: 
 	rm -rf build/*.o
+	rm -rf bin/*
+
+.PHONY: all clean
