@@ -30,7 +30,7 @@ struct figures {
     triangle b;
 };
 
-oid fill_struct(vector<string>& a, char figure[], vector<figures>& res)
+void fill_struct(vector<string>& a, char figure[], vector<figures>& res)
 {
     vector<int> b;
     b.resize(a.size());
