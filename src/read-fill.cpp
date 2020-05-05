@@ -67,7 +67,7 @@ void fill_struct(vector<string>& a, char figure[], vector<figures>& res)
     }
 }
 
-void print_triangle(triangle* tr)
+void print_triangle(triangle* tr, vector<figures> result, int num)
 {
     if (tr->figure == "") {
         return;
@@ -87,6 +87,44 @@ void print_triangle(triangle* tr)
     cout << "))" << endl;
     cout << "\tperimeter = " << tr->perimeter << endl;
     cout << "\tarea = " << tr->area << endl;
+    int s = result.size();
+    bool flg;
+    for (int i = 0; i < s; i++) {
+        if (i + 1 == num) {
+            goto nxt;
+        }
+        if (result[i].a.figure == "") {
+            flg = intersections_triangles(tr, &(result[i].b));
+            if (flg) {
+                tr->inter.push_back(i + 1);
+                tr->f.push_back(2);
+                flg = false;
+            }
+        } else {
+            flg = inter_circle_triangl(&(result[i].a), tr);
+            if (flg) {
+                tr->inter.push_back(i + 1);
+                tr->f.push_back(1);
+                flg = false;
+            }
+        }
+    nxt:
+        flg = false;
+    }
+    if (tr->inter.empty()) {
+        return;
+    } else {
+        cout << "\tintersections:" << endl;
+        int sizee = tr->inter.size();
+        for (int i = 0; i < sizee; i++) {
+            cout << "\t\t" << tr->inter[i] << ". ";
+            if (tr->f[i] == 1) {
+                cout << "circle" << endl;
+            } else {
+                cout << "triangle" << endl;
+            }
+        }
+    }
 }
 
 void print_circle(circle* c, vector<figures> result, int num)
@@ -145,7 +183,7 @@ void print(vector<figures> result)
         count++;
         cout << count << ". ";
         print_circle(&(i->a), result, count);
-        print_triangle(&(i->b));
+        print_triangle(&(i->b), result, count);
     }
 }
 
