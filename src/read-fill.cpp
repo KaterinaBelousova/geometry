@@ -1,4 +1,5 @@
 #include "geom.h"
+#include "intersections.h"
 #include "split.h"
 #include <cstdio>
 #include <cstdlib>
@@ -11,26 +12,6 @@
 #include <vector>
 #define N 256
 #define PI 3.14
-
-struct circle {
-    string figure;
-    int x, y;
-    double r;
-    double perimeter;
-    double area;
-};
-
-struct triangle {
-    string figure;
-    vector<int> xy;
-    double perimeter;
-    double area;
-};
-
-struct figures {
-    circle a;
-    triangle b;
-};
 
 void fill_struct(vector<string>& a, char figure[], vector<figures>& res)
 {
@@ -107,7 +88,8 @@ void print_triangle(triangle* tr)
     cout << "\tperimeter = " << tr->perimeter << endl;
     cout << "\tarea = " << tr->area << endl;
 }
-void print_circle(circle* c)
+
+void print_circle(circle* c, vector<figures> result, int num)
 {
     if (c->figure == "") {
         return;
@@ -115,6 +97,44 @@ void print_circle(circle* c)
     cout << "\tcircle(" << c->x << " " << c->y << ", " << c->r << ")" << endl;
     cout << "\tperimeter = " << c->perimeter << endl;
     cout << "\tarea = " << c->area << endl;
+    int s = result.size();
+    bool flg;
+    for (int i = 0; i < s; i++) {
+        if (i + 1 == num) {
+            goto nxt;
+        }
+        if (result[i].a.figure == "") {
+            flg = inter_circle_triangl(c, &(result[i].b));
+            if (flg) {
+                c->inter.push_back(i + 1);
+                c->f.push_back(2);
+                flg = false;
+            }
+        } else {
+            flg = intersections_circles(c, &(result[i].a));
+            if (flg) {
+                c->inter.push_back(i + 1);
+                c->f.push_back(1);
+                flg = false;
+            }
+        }
+    nxt:
+        flg = false;
+    }
+    if (c->inter.empty()) {
+        return;
+    } else {
+        cout << "\tintersections:" << endl;
+        int sizee = c->inter.size();
+        for (int i = 0; i < sizee; i++) {
+            cout << "\t\t" << c->inter[i] << ". ";
+            if (c->f[i] == 1) {
+                cout << "circle" << endl;
+            } else {
+                cout << "triangle" << endl;
+            }
+        }
+    }
 }
 
 void print(vector<figures> result)
@@ -124,7 +144,7 @@ void print(vector<figures> result)
          ++i) {
         count++;
         cout << count << ". ";
-        print_circle(&(i->a));
+        print_circle(&(i->a), result, count);
         print_triangle(&(i->b));
     }
 }
@@ -141,7 +161,8 @@ void inf_input()
     vector<figures> result;
     string str, coor;
     for (int i = 0; i < num; i++) {
-        cout << "enter circle(x y, r) or triangle ((x1 y1, x2 y2, x3 y3, x1 "
+        cout << "enter circle(x y, r) or triangle ((x1 y1, x2 y2, x3 y3, "
+                "x1 "
                 "y1)): ";
         cin.getline(tmp, 100, '(');
         cin.getline(coo, 100);
