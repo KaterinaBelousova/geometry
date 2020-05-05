@@ -2,7 +2,7 @@
 #define READFILL_H
 #include <string>
 #include <vector>
-
+using namespace std;
 struct circle {
     string figure;
     int x, y;
