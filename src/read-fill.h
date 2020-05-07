@@ -1,7 +1,7 @@
 #ifndef READFILL_H
 #define READFILL_H
-#include <string>
 #include <string.h>
+#include <string>
 #include <vector>
 using namespace std;
 struct circle {

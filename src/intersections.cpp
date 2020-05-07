@@ -21,7 +21,7 @@ double area_int(int x1, int y1, int x2, int y2, int x3, int y3)
     return (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
 }
 
-bool inters_segment(int a, int b, int c, int d)
+bool inters_point(int a, int b, int c, int d)
 {
     if (a > b) {
         swap(a, b);
@@ -35,7 +35,7 @@ bool inters_segment(int a, int b, int c, int d)
 bool inter_segments(
         int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
 {
-    return inters_segment(x1, x2, x3, x4) && inters_segment(y1, y1, y3, y4)
+    return inters_point(x1, x2, x3, x4) && inters_point(y1, y1, y3, y4)
             && (area_int(x1, y1, x2, y2, x3, y3)
                         * area_int(x1, y1, x2, y2, x4, y4)
                 <= 0)
