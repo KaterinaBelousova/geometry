@@ -1,7 +1,6 @@
 #include "read-fill.h"
-
 int main()
 {
-    inf_input();
+	inf_input();
     return 0;
 }
