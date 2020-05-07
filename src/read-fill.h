@@ -1,6 +1,7 @@
 #ifndef READFILL_H
 #define READFILL_H
 #include <string>
+#include <string.h>
 #include <vector>
 using namespace std;
 struct circle {
@@ -26,10 +27,9 @@ struct figures {
     triangle b;
 };
 
-void fill_struct(
-        std::vector<std::string>& a, char figure[], std::vector<figures>& res);
+void fill_struct(vector<string>& a, char figure[], vector<figures>& res);
 void print_triangle(triangle* tr);
 void print_circle(circle* c);
-void print(std::vector<figures> result);
+void print(vector<figures> result);
 void inf_input();
 #endif
