@@ -6,7 +6,7 @@ SOURCES = src/main.cpp src/split.cpp src/geom.cpp src/read-fill.cpp src/intersec
 OBJECTS = build/src/main.o build/src/geom.o build/src/split.o build/src/read-fill.o build/src/intersections.o
 OBJECTS_T = build/test/test_intersect.o
 .PHONY: all clean test_run run
-all: $(SOURCES) $(EXECUTABLE) $(TEST)
+all: $(SOURCES) $(EXECUTABLE) $(TEST) test_run
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(EXECUTABLE) -lm
